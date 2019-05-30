@@ -32,21 +32,8 @@ public class AddressController {
 	ObjectMapper mapper = new ObjectMapper();
 	mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);	
 	GoogleGeoCodeResponse address = new GoogleGeoCodeResponse();
-//	try {
-	//URL url = new URL("https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAxAUF8id0rwkt_S48z6vlLy9sip_IaEt8");
-	//address = mapper.readValue(url, GoogleGeoCodeResponse.class);
-	System.out.println("I'm being a retard again");
+	System.out.println("calling geo api");
 	address = restTemplate.getForObject("https://maps.googleapis.com/maps/api/geocode/json?latlng={latitude},{longitude}&key=AIzaSyCW2inUNb43jZd7QFOny4T-xa0zmH9TWRc&sensor=true", GoogleGeoCodeResponse.class,vars);
-//	} catch (IOException e1) {
-//		e1.printStackTrace();
-//	}
 	return address;
-	//Address address = restTemplate.getForObject("https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAxAUF8id0rwkt_S48z6vlLy9sip_IaEt8", Address.class);
-	/*GeocodeAddressParser ref = new GeocodeAddressParser();
-
-	Address address = new Address();
-        address.setAddress(ref.getLocationInfo("23.0043673","72.5411868999996"));
-	return address;
-	*/
   }
 }
