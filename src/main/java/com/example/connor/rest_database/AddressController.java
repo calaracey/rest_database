@@ -20,8 +20,6 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/latlng")
 public class AddressController {
-  @Autowired
- 
   @RequestMapping(value = "/{lat}:{lng}", method = RequestMethod.GET)
   public GoogleGeoCodeResponse getAddressbyLatLng(@PathVariable String lat, @PathVariable String lng) {
 	Map<String, String> vars = new HashMap<String, String>();
