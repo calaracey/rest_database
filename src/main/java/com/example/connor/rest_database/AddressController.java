@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/latlng")
 public class AddressController {
   @RequestMapping(value = "/{lat}:{lng}", method = RequestMethod.GET)
-  public String getAddressbyLatLng(@PathVariable String lat, @PathVariable String lng) {
+  public static String getAddressbyLatLng(@PathVariable String lat, @PathVariable String lng) {
 	Map<String, String> vars = new HashMap<String, String>();
 
         vars.put("latitude", lat);
