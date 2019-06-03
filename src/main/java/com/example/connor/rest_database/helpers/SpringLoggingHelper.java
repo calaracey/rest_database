@@ -11,6 +11,15 @@ public class SpringLoggingHelper {
     public void GetPersonById(ObjectId id){
         logger.info("Fetching person with id: {}",id);
     }
+    public void GetPersonByName(String name){
+        logger.info("Fetching people with name: {}",name);
+    }
+    public void GetNonNullAddress(){
+        logger.info("Fetching people nonnull address fields");
+    }
+    public void GetPersonByRegex(String pattern){
+        logger.info("Fetching people with first name pattern: {}",pattern);
+    }
     public void CreatePerson(ObjectId id){
         logger.info("Creating new person with id: {}", id);
     }

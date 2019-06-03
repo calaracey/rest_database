@@ -1,5 +1,6 @@
 package com.example.connor.rest_database;
 import com.example.connor.rest_database.models.People;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.example.connor.rest_database.helpers.SpringLoggingHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,21 @@ public class PeopleController {
 			new SpringLoggingHelper().GetAllPeople();
 			return repository.findAll();
 		}
+	@RequestMapping(method = RequestMethod.GET)
+		public List<People> getPersonByFirstName(@RequestParam(value="name") String name) {
+			new SpringLoggingHelper().GetPersonByName(name);
+			return repository.findByfirstName(name);
+		}
+	@RequestMapping(value = "/regex/{pattern}", method = RequestMethod.GET)
+		public List<People> getPersonById(@PathVariable("pattern") String pattern) {
+			new SpringLoggingHelper().GetPersonByRegex(pattern);
+			return repository.readByfirstNameRegex(pattern);
+		}
+	@RequestMapping(value = "/nonNullAddress", method = RequestMethod.GET)
+		public List<People> getNonNullAddress() {
+			new SpringLoggingHelper().GetNonNullAddress();
+			return repository.findByAddressIsNotNull();
+		}
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 		public People getPersonById(@PathVariable("id") ObjectId id) {
 			new SpringLoggingHelper().GetPersonById(id);
@@ -33,8 +49,9 @@ public class PeopleController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 		public void updatePerson(@PathVariable("id") ObjectId id, @Valid @RequestBody People people) {
 			people.set_id(id);
+			AddressController addcont = new AddressController();
 			if ((people.latitude != 0) && (people.longitude != 0)) {
-				people.address = AddressController.getAddressbyLatLng(Integer.toString(people.latitude), Integer.toString(people.longitude));
+				people.address = addcont.getAddressbyLatLng(Integer.toString(people.latitude), Integer.toString(people.longitude));
 			}
 			new SpringLoggingHelper().UpdatePerson(id);
 			repository.save(people);
@@ -42,11 +59,11 @@ public class PeopleController {
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 		public People createPerson(@Valid @RequestBody People people) {
-			//people.set_id(ObjectId.get());
 			ObjectId id = ObjectId.get();
 			people.set_id(id);
+			AddressController addcont = new AddressController();
 			if ((people.latitude != 0) && (people.longitude != 0)) {
-				people.address = AddressController.getAddressbyLatLng(Integer.toString(people.latitude), Integer.toString(people.longitude));
+				people.address = addcont.getAddressbyLatLng(Integer.toString(people.latitude), Integer.toString(people.longitude));
 			}
 			repository.save(people);
 			new SpringLoggingHelper().CreatePerson(id);
