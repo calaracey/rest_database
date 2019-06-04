@@ -1,3 +1,10 @@
+/*
+* AddressController.java
+* Description: Consumes the google geocoding api
+* Inputs: Lat and Long ints
+* Outputs: Formatted address string
+*/
+
 package com.example.connor.rest_database;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import java.util.*;
@@ -44,6 +51,7 @@ public class AddressController {
 			} catch (RuntimeException e) {
 				logger.error("Error in attempting to get address",e);
 				System.out.println(e.getClass().getName());
+				return null;
 			}	
 				return address.results[0].formatted_address;
 		}
