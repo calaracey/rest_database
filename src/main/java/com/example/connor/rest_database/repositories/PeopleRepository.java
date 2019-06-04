@@ -1,3 +1,8 @@
+/*
+PeopleRepository.java
+Description: database query methods
+*/
+
 package com.example.connor.rest_database.repositories;
 import java.util.List;
 import com.example.connor.rest_database.models.People;
