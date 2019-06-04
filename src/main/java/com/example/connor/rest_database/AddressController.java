@@ -47,7 +47,7 @@ public class AddressController {
 				GoogleGeoCodeResponse address = new GoogleGeoCodeResponse();
 				System.out.println("calling geo api");
 				try {
-				address = restTemplate.getForObject("https://maps.googleapis.com/maps/api/geocode/json?latlng={latitude},{longitude}&key=AIzaSyCW2inUNb43jZd7QFOny4T-xa0zmH9TWRc&sensor=true", GoogleGeoCodeResponse.class,vars);
+				address = restTemplate.getForObject("https://maps.googleapis.com/maps/api/geocode/json?latlng={latitude},{longitude}&key=&sensor=true", GoogleGeoCodeResponse.class,vars);
 			} catch (RuntimeException e) {
 				logger.error("Error in attempting to get address",e);
 				System.out.println(e.getClass().getName());
